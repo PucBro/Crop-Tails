@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://df2b0was662vs"]
+
+[ext_resource type="Texture2D" uid="uid://dej4o3tax6jba" path="res://assets/game/objects/basic_grass_biom_things 1.png" id="1_a8qts"]
+[ext_resource type="Shader" uid="uid://bs0nj1oyehxji" path="res://scenes/objects/trees/tree_shake.gdshader" id="1_w057i"]
+[ext_resource type="Script" uid="uid://ddl1dxq2ka5wy" path="res://scenes/objects/trees/small_tree.gd" id="2_g5iuu"]
+[ext_resource type="PackedScene" uid="uid://iw6ss4ln5i0p" path="res://scenes/components/hurt_component.tscn" id="2_xyb6m"]
+[ext_resource type="PackedScene" uid="uid://csdxbnarg0twl" path="res://scenes/components/damage_component.tscn" id="3_w057i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_skbjc"]
+resource_local_to_scene = true
+shader = ExtResource("1_w057i")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyb6m"]
+atlas = ExtResource("1_a8qts")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_au4vd"]
+radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_au4vd"]
+size = Vector2(8, 20)
+
+[node name="SmallTree" type="Sprite2D" unique_id=1553769531]
+material = SubResource("ShaderMaterial_skbjc")
+position = Vector2(0, -3)
+texture = SubResource("AtlasTexture_xyb6m")
+offset = Vector2(0, -6)
+script = ExtResource("2_g5iuu")
+
+[node name="DamageComponent" parent="." unique_id=950675976 instance=ExtResource("3_w057i")]
+max_damage = 3
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2111752654]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1724095263]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_au4vd")
+
+[node name="HurtComponent" parent="." unique_id=770371467 instance=ExtResource("2_xyb6m")]
+position = Vector2(0, -8)
+tool = 1
+
+[node name="HurtCollisionShape2D" type="CollisionShape2D" parent="HurtComponent" unique_id=1261644691]
+shape = SubResource("RectangleShape2D_au4vd")
+debug_color = Color(0.8664298, 0.13876304, 0.7951991, 0.41960785)

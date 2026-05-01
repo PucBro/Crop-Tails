@@ -1,0 +1,9 @@
+# Directorio de caché de Godot 4
+.godot/
+
+# Archivos de exportación (opcional, pero recomendado)
+export_presets.cfg
+*.apk
+*.aab
+*.exe
+*.pck

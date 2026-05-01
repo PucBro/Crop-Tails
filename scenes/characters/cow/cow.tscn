@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://cvgm7gain1wk6"]
+
+[ext_resource type="Script" uid="uid://cxc4kdhve5c0" path="res://scenes/characters/cow/cow.gd" id="1_j7g5r"]
+[ext_resource type="Texture2D" uid="uid://bffhtv5g6cyxa" path="res://assets/game/characters/free_cow_sprites.png" id="2_14ngq"]
+[ext_resource type="Script" uid="uid://ts6w1rrej2q3" path="res://scripts/state_machine/node_state_machine.gd" id="3_4jynl"]
+[ext_resource type="Script" uid="uid://h6ea4cndbhr7" path="res://scenes/characters/cow/idle_state.gd" id="4_cgos1"]
+[ext_resource type="Script" uid="uid://bkswv8s03s4a3" path="res://scenes/characters/cow/walk_state.gd" id="5_gsrfl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilrem"]
+atlas = ExtResource("2_14ngq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7g5r"]
+atlas = ExtResource("2_14ngq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jynl"]
+atlas = ExtResource("2_14ngq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgos1"]
+atlas = ExtResource("2_14ngq")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsrfl"]
+atlas = ExtResource("2_14ngq")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1cmdg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilrem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7g5r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jynl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgos1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsrfl")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_essvg"]
+radius = 8.0
+
+[node name="Cow" type="CharacterBody2D" unique_id=1539363752]
+collision_layer = 64
+script = ExtResource("1_j7g5r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=300624855]
+position = Vector2(-1, -13)
+sprite_frames = SubResource("SpriteFrames_1cmdg")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2147018145]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_essvg")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=285172808]
+path_desired_distance = 10.0
+navigation_layers = 2
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="StateMachine" type="Node2D" parent="." unique_id=763432723 node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("3_4jynl")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node2D" parent="StateMachine" unique_id=951151966 node_paths=PackedStringArray("character", "animated_sprite_2d")]
+script = ExtResource("4_cgos1")
+character = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="Walk" type="Node2D" parent="StateMachine" unique_id=1886321097 node_paths=PackedStringArray("character", "animated_sprite_2d", "navigation_agent_2d")]
+script = ExtResource("5_gsrfl")
+character = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+navigation_agent_2d = NodePath("../../NavigationAgent2D")

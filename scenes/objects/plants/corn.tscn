@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cp2wdp80pp18w"]
+
+[ext_resource type="Script" uid="uid://yutavu8mo0bj" path="res://scenes/objects/plants/corn.gd" id="1_hgaca"]
+[ext_resource type="PackedScene" uid="uid://iw6ss4ln5i0p" path="res://scenes/components/hurt_component.tscn" id="1_hm4is"]
+[ext_resource type="Texture2D" uid="uid://cn2fkh2urnib" path="res://assets/game/objects/Basic_Plants.png" id="2_aphyd"]
+[ext_resource type="PackedScene" uid="uid://d35nqmh1c0xnj" path="res://scenes/objects/plants/watering_particles.tscn" id="2_ofjf8"]
+[ext_resource type="PackedScene" uid="uid://blmeefima2bp5" path="res://scenes/objects/plants/flowering_particles.tscn" id="3_5ucl7"]
+[ext_resource type="PackedScene" uid="uid://cjlc6ntdvmoro" path="res://scenes/components/growth_cycle_component.tscn" id="5_q3ekf"]
+[ext_resource type="PackedScene" uid="uid://bgprf47w5uvka" path="res://scenes/components/save_data_component.tscn" id="7_q3ekf"]
+[ext_resource type="Resource" uid="uid://sbybiywmb8mp" path="res://resources/scene_data_resource.tres" id="8_310os"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ucl7"]
+atlas = ExtResource("2_aphyd")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ofjf8"]
+size = Vector2(13, 9)
+
+[node name="Corn" type="Node2D" unique_id=2084998009]
+y_sort_enabled = true
+script = ExtResource("1_hgaca")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=771180910]
+position = Vector2(0, -4)
+texture = SubResource("AtlasTexture_5ucl7")
+hframes = 6
+vframes = 2
+frame = 1
+
+[node name="WateringParticles" parent="." unique_id=613778033 instance=ExtResource("2_ofjf8")]
+
+[node name="FloweringParticles" parent="." unique_id=322830012 instance=ExtResource("3_5ucl7")]
+
+[node name="GrowthCycleComponent" parent="." unique_id=2107434674 instance=ExtResource("5_q3ekf")]
+
+[node name="HurtComponent" parent="." unique_id=770371467 instance=ExtResource("1_hm4is")]
+position = Vector2(0, -4)
+tool = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent" unique_id=955342210]
+position = Vector2(-0.5, 2.5)
+shape = SubResource("RectangleShape2D_ofjf8")
+
+[node name="SaveDataComponent" parent="." unique_id=1112707769 instance=ExtResource("7_q3ekf")]
+save_data_resource = ExtResource("8_310os")
