@@ -1,11 +1,14 @@
 res://scenes/components/
+res://scripts/globals/
+res://assets/ui/
+res://scenes/ui/
+res://dialogue/
+res://dialogue/conversations/
 res://assets/game/characters/
 res://scenes/characters/guide/
 res://resources/
-res://scripts/globals/
 res://scenes/
 res://scenes/objects/plants/
-res://scenes/ui/
 res://assets/ui/fonts/
 res://scenes/objects/
 res://scenes/Ui/
@@ -17,4 +20,3 @@ res://scenes/houses/
 res://assets/game/tilesets/
 res://TileSets/
 res://scenes/characters/player/
-res://
