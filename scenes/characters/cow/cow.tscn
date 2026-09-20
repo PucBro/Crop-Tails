@@ -58,6 +58,7 @@ animations = [{
 radius = 8.0
 
 [node name="Cow" type="CharacterBody2D" unique_id=1539363752]
+y_sort_enabled = true
 collision_layer = 64
 script = ExtResource("1_j7g5r")
 
@@ -76,7 +77,6 @@ path_desired_distance = 10.0
 navigation_layers = 2
 path_postprocessing = 1
 avoidance_enabled = true
-debug_enabled = true
 
 [node name="StateMachine" type="Node2D" parent="." unique_id=763432723 node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("3_4jynl")
